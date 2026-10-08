@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { redirect } from "next/navigation";
+import { headers } from "next/headers";
 import { currentOwner } from "@/lib/supabase/server";
 import { PLAN_LIMITS } from "@/lib/limits";
 import { UploadBox } from "@/components/UploadBox/UploadBox";
+import { HelpLink } from "@/components/HelpLink/HelpLink";
+import { RenameWorkspace } from "@/components/RenameWorkspace/RenameWorkspace";
 import { signOut } from "@/app/auth-actions";
 import { deleteDocument, markHandled } from "./actions";
 import styles from "./dashboard.module.css";
@@ -41,7 +43,7 @@ export default async function DashboardPage({ searchParams }: PageProps<"/dashbo
   monthStart.setUTCDate(1);
   monthStart.setUTCHours(0, 0, 0, 0);
 
-  const [{ data: docs }, { data: open }, { data: month }] = await Promise.all([
+  const [{ data: docs }, { data: open }, { data: month }, { count: everAsked }] = await Promise.all([
     db
       .from("documents")
       .select("id, file_name, pages, created_at, status, error")
@@ -54,7 +56,12 @@ export default async function DashboardPage({ searchParams }: PageProps<"/dashbo
       .order("created_at", { ascending: false })
       .limit(500),
     db.from("questions").select("answered").gte("created_at", monthStart.toISOString()),
+    db.from("questions").select("id", { count: "exact", head: true }),
   ]);
+
+  const h = await headers();
+  const origin = `${h.get("x-forwarded-proto") ?? "https"}://${h.get("x-forwarded-host") ?? h.get("host")}`;
+  const helpUrl = `${origin}/c/${workspace.slug}`;
 
   // The same question asked several times shows once, with a count.
   const grouped = new Map<string, { question: string; times: number; lastAsked: string }>();
@@ -80,10 +87,8 @@ export default async function DashboardPage({ searchParams }: PageProps<"/dashbo
       <header className={styles.head}>
         <div>
           <p className={styles.kicker}>Signed in as {user.email}</p>
-          <h1 className={styles.title}>{workspace.name}</h1>
-          <p className={styles.helpLink}>
-            Your help page: <Link href={`/c/${workspace.slug}`}>/c/{workspace.slug}</Link>
-          </p>
+          <RenameWorkspace name={workspace.name} />
+          <HelpLink url={helpUrl} />
         </div>
         <div className={styles.plan}>
           <p>
@@ -114,6 +119,28 @@ export default async function DashboardPage({ searchParams }: PageProps<"/dashbo
         </div>
       </header>
 
+      {(documents.length === 0 || !everAsked) && (
+        <section className={styles.start} aria-labelledby="start-title">
+          <h2 id="start-title" className={styles.sectionTitle}>
+            Get started
+          </h2>
+          <ol className={styles.steps}>
+            <li data-done={documents.length > 0 || undefined}>
+              <strong>Upload your first document.</strong> A manual, policy, FAQ or price list, in
+              the Documents section below. It&rsquo;s ready to answer from in seconds.
+            </li>
+            <li data-done={Boolean(everAsked) || undefined}>
+              <strong>Ask your help page a question.</strong> Open it above and try something a
+              customer would ask. Each answer shows the page it came from.
+            </li>
+            <li>
+              <strong>Share the link.</strong> Copy your help page link above and send it to
+              customers, or add it to your website. Questions it can&rsquo;t answer appear here.
+            </li>
+          </ol>
+        </section>
+      )}
+
       <section className={styles.section} aria-labelledby="unanswered-title">
         <h2 id="unanswered-title" className={styles.sectionTitle}>
           Unanswered questions <span className={styles.count}>{unanswered.length}</span>
@@ -123,7 +150,11 @@ export default async function DashboardPage({ searchParams }: PageProps<"/dashbo
           covers them, then mark the question as handled.
         </p>
         {unanswered.length === 0 ? (
-          <p className={styles.emptyRow}>Nothing waiting. Every question so far was answered from your documents.</p>
+          <p className={styles.emptyRow}>
+            {everAsked
+              ? "Nothing waiting. Every question so far was answered from your documents."
+              : "No questions yet. Questions your documents can\u2019t answer will appear here."}
+          </p>
         ) : (
           <div className={styles.tableWrap} tabIndex={0} role="region" aria-label="Unanswered questions table, scrollable">
             <table className={styles.table}>

@@ -31,3 +31,12 @@ export async function markHandled(form: FormData) {
     .ilike("question", question.replace(/[%_\\]/g, "\\$&"));
   revalidatePath("/dashboard");
 }
+
+export async function renameWorkspace(form: FormData) {
+  const owner = await currentOwner();
+  const name = String(form.get("name") ?? "").trim();
+  if (!owner || !name || name.length > 80) return;
+  // Owners may update only the name column (database grant); RLS limits it to their own workspace.
+  await owner.db.from("workspaces").update({ name }).eq("id", owner.workspace.id);
+  revalidatePath("/dashboard");
+}

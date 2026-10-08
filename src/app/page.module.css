@@ -33,3 +33,76 @@
   font-size: var(--text-s);
   color: var(--color-ink-muted);
 }
+
+.how {
+  display: grid;
+  gap: var(--space-5);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: var(--border);
+}
+
+.howTitle {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.howSteps {
+  display: grid;
+  gap: var(--space-5);
+  counter-reset: how;
+}
+
+@media (min-width: 48rem) {
+  .howSteps {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.howSteps li {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  counter-increment: how;
+}
+
+/* The step number sits on a highlighter swatch, like a marked line in a document */
+.howSteps li::before {
+  content: counter(how);
+  justify-self: start;
+  padding: 0 var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-s);
+  background: var(--color-highlighter);
+  border-radius: 2px;
+}
+
+.howSteps h3 {
+  font-size: var(--text-l);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.howSteps p {
+  font-family: var(--font-reading);
+  color: var(--color-ink-muted);
+}
+
+.howCta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  font-weight: 700;
+  color: var(--color-surface);
+  text-decoration: none;
+  background: var(--color-plum);
+  border-radius: var(--radius-control);
+}
+
+.howCta a:hover {
+  color: var(--color-surface);
+  background: var(--color-plum-hover);
+}

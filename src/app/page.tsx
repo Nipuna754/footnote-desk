@@ -26,6 +26,35 @@ export default function Home() {
         suggestions={suggestions}
         opening={{ question: openingQuestion, answer: openingAnswer }}
       />
+
+      <section className={styles.how} aria-labelledby="how-title">
+        <h2 id="how-title" className={styles.howTitle}>
+          How it works
+        </h2>
+        <ol className={styles.howSteps}>
+          <li>
+            <h3>Upload your documents</h3>
+            <p>Manuals, policies, FAQs or price lists, as PDF, TXT or Markdown. Each one is ready to answer from in seconds.</p>
+          </li>
+          <li>
+            <h3>Customers ask on your help page</h3>
+            <p>
+              Answers come only from your documents, with the file and page for every claim. If the
+              documents don&rsquo;t cover it, it says so instead of guessing.
+            </p>
+          </li>
+          <li>
+            <h3>You see what&rsquo;s missing</h3>
+            <p>
+              Questions it couldn&rsquo;t answer appear on your dashboard, so you know exactly which
+              document to add next.
+            </p>
+          </li>
+        </ol>
+        <p className={styles.howCta}>
+          <Link href="/signup">Create your help centre, free</Link>
+        </p>
+      </section>
     </main>
   );
 }
