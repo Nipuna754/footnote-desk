@@ -14,7 +14,7 @@ const plans = [
     period: "forever",
     blurb: "For trying Footnote Desk on a few documents.",
     features: [
-      "5 documents, up to 50 pages each",
+      "5 documents (PDF, TXT or Markdown, up to 10 MB)",
       "100 questions a month",
       "Citations to file and page",
       "List of unanswered questions",
@@ -28,11 +28,11 @@ const plans = [
     period: "a month",
     blurb: "For a help centre customers actually use.",
     features: [
-      "50 documents, up to 500 pages each",
+      "50 documents (PDF, TXT or Markdown, up to 10 MB)",
       "2,000 questions a month",
       "Citations to file and page",
-      "Unanswered questions, exportable as CSV",
-      "No “Powered by Footnote Desk” label",
+      "List of unanswered questions",
+      "Change card or cancel any time",
     ],
     cta: { label: "Upgrade to Pro", href: "/dashboard" },
     featured: true,
