@@ -1,0 +1,63 @@
+AERIN P3 AIR PURIFIER - USER MANUAL
+
+Welcome
+Thank you for choosing the Aerin P3. This manual explains how to set up, use
+and look after your purifier. Keep it somewhere handy.
+
+What's in the box
+The Aerin P3 unit, one HEPA filter (already fitted), one washable pre-filter
+(already fitted), a power cable and this manual.
+
+Safety
+Use the P3 indoors only. Keep it at least 30 cm from walls and curtains so
+air can flow freely. Do not cover the air outlet on top of the unit. Unplug
+the unit before cleaning it or changing a filter.Setting up
+
+Remove all packaging, including the plastic bag around the HEPA filter. Open
+the filter cover at the back, take the filter out of its bag and push it
+back into place until it clicks.
+
+Place the P3 on a flat, firm surface. Plug it in and press the power button.
+The ring of lights glows white for three seconds while the air quality
+sensor warms up.
+
+Room size
+The P3 is designed for rooms up to 40 square metres. In a larger room it
+will still work, but it takes longer to clean the air.Fan speeds and night mode
+
+The P3 has four fan speeds. Press the fan button to move through them; the
+ring of lights shows the current speed.
+
+Hold the fan button for 3 seconds to turn on night mode. The display dims
+and the fan runs at its lowest speed (24 dB).
+
+Auto mode adjusts the speed every few minutes based on the air quality
+sensor at the back of the unit. Press the auto button to turn it on or off.Looking after the filters
+
+The P3 uses two filters: a washable pre-filter that catches hair and dust,
+and a sealed HEPA filter that catches fine particles.
+
+Replace the HEPA filter every 6 to 8 months. The filter light turns amber
+when about two weeks of life remain. After fitting a new filter, hold the
+filter button for 5 seconds to reset the light.
+
+Do not wash the HEPA filter; water damages the fibres. The pre-filter can be
+vacuumed or rinsed every two weeks and must be fully dry before refitting.Troubleshooting
+
+If the unit clicks but the fan does not start, check that the filter cover
+is fully closed. A safety switch stops the fan while the cover is open.
+
+If the display shows E2, unplug the unit for 30 seconds and plug it back in.
+If E2 returns, contact support with the serial number from the base of the
+unit.
+
+If the air smells musty, the pre-filter may be damp. Take it out and let it
+dry completely before refitting.Specifications
+
+Model: Aerin P3. Power: 220-240 V, 35 W at maximum speed. Noise: 24 dB
+(night mode) to 52 dB (maximum speed). Weight: 4.1 kg. Dimensions: 22 x 22 x
+48 cm.
+
+Support
+Email support@aerinhome.example and include your order number and the serial
+number from the base of the unit.

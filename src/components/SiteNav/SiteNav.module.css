@@ -1,0 +1,72 @@
+.bar {
+  background: var(--color-surface);
+  border-bottom: var(--border);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  column-gap: var(--space-4);
+  min-height: 3.5rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 800;
+  font-size: var(--text-l);
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.brand svg {
+  color: var(--color-plum);
+}
+
+.links {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding-inline: var(--space-3);
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+  text-decoration: none;
+  border-radius: var(--radius-control);
+}
+
+.link:hover {
+  color: var(--color-ink);
+  background: var(--color-paper);
+}
+
+.link[aria-current="page"] {
+  color: var(--color-plum);
+  background: var(--color-plum-wash);
+}
+
+/* Phones: the name gets the first row, the menu the second */
+@media (max-width: 30rem) {
+  .brand {
+    min-height: 3rem;
+  }
+
+  .inner nav {
+    width: 100%;
+    margin-left: calc(-1 * var(--space-3));
+  }
+
+  .link {
+    min-height: 2.75rem;
+  }
+}

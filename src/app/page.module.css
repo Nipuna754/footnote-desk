@@ -1,0 +1,35 @@
+.main {
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.intro {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 46rem;
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+/* The headline's own citation: highlighted like a quoted passage */
+.receipt {
+  background: linear-gradient(var(--color-highlighter), var(--color-highlighter)) no-repeat 0 85% / 100% 0.45em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.lede {
+  font-family: var(--font-reading);
+  font-size: var(--text-l);
+  line-height: 1.45;
+}
+
+.demoNote {
+  font-size: var(--text-s);
+  color: var(--color-ink-muted);
+}

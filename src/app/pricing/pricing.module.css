@@ -1,0 +1,117 @@
+.main {
+  padding-block: var(--space-7) var(--space-8);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 40rem;
+  margin-bottom: var(--space-6);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.lede {
+  font-family: var(--font-reading);
+  font-size: var(--text-l);
+  line-height: 1.45;
+}
+
+.plans {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 56rem;
+}
+
+@media (min-width: 48rem) {
+  .plans {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-control);
+}
+
+.plan[data-featured] {
+  border: 2px solid var(--color-plum);
+}
+
+.planName {
+  font-size: var(--text-l);
+  font-weight: 800;
+}
+
+.price {
+  color: var(--color-ink-muted);
+}
+
+.amount {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+}
+
+.blurb {
+  font-family: var(--font-reading);
+}
+
+.features {
+  display: grid;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  margin-bottom: auto;
+  border-top: var(--border);
+  font-size: var(--text-s);
+}
+
+/* Each feature marked like a highlighted line in a document */
+.features li {
+  padding-left: var(--space-5);
+  background: linear-gradient(var(--color-highlighter), var(--color-highlighter)) no-repeat 0 0.45em / 0.75rem 0.6em;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--color-plum);
+  border: 1px solid var(--color-plum);
+  border-radius: var(--radius-control);
+}
+
+.cta:hover {
+  background: var(--color-plum-wash);
+}
+
+.plan[data-featured] .cta {
+  color: var(--color-surface);
+  background: var(--color-plum);
+}
+
+.plan[data-featured] .cta:hover {
+  color: var(--color-surface);
+  background: var(--color-plum-hover);
+}
+
+.note {
+  margin-top: var(--space-5);
+  font-size: var(--text-s);
+  color: var(--color-ink-muted);
+}

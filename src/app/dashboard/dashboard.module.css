@@ -1,0 +1,236 @@
+.main {
+  display: grid;
+  gap: var(--space-7);
+  padding-block: var(--space-6) var(--space-8);
+}
+
+.head {
+  display: grid;
+  gap: var(--space-5);
+  align-items: end;
+  padding-bottom: var(--space-5);
+  border-bottom: var(--border);
+}
+
+@media (min-width: 56rem) {
+  .head {
+    grid-template-columns: 1fr minmax(0, 26rem);
+  }
+}
+
+.kicker {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-ink-muted);
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.plan {
+  display: grid;
+  gap: var(--space-2);
+  font-size: var(--text-s);
+}
+
+.meter {
+  width: 100%;
+  height: 0.5rem;
+  appearance: none;
+  border: 0;
+  border-radius: 999px;
+  background: var(--color-rule);
+  overflow: hidden;
+}
+
+.meter::-webkit-progress-bar {
+  background: var(--color-rule);
+}
+
+.meter::-webkit-progress-value {
+  background: var(--color-plum);
+}
+
+.meter::-moz-progress-bar {
+  background: var(--color-plum);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-l);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.count {
+  padding: 0.1rem var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--color-plum);
+  background: var(--color-plum-wash);
+  border-radius: 4px;
+}
+
+.help {
+  max-width: 60ch;
+  font-size: var(--text-s);
+  color: var(--color-ink-muted);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-control);
+}
+
+.table {
+  width: 100%;
+  min-width: 32rem;
+  border-collapse: collapse;
+  font-size: var(--text-s);
+}
+
+.table th,
+.table td {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  border-bottom: var(--border);
+}
+
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.table th {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-ink-muted);
+}
+
+.table th.num,
+.table td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.questionCell {
+  font-family: var(--font-reading);
+  font-size: var(--text-m);
+}
+
+.date {
+  white-space: nowrap;
+  color: var(--color-ink-muted);
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--color-plum);
+}
+
+.status[data-status="processing"]::before {
+  background: var(--color-highlighter);
+  outline: 1px solid var(--color-rule-strong);
+}
+
+.status[data-status="failed"] {
+  color: var(--color-error);
+}
+
+.status[data-status="failed"]::before {
+  background: var(--color-error);
+}
+
+.helpLink {
+  margin-top: var(--space-2);
+  font-size: var(--text-s);
+  overflow-wrap: anywhere;
+}
+
+.planActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.planActions a {
+  font-weight: 700;
+}
+
+.textButton {
+  min-height: 2.25rem;
+  padding: 0 var(--space-2);
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--color-plum);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  background: none;
+  border: 0;
+  border-radius: var(--radius-chip);
+  cursor: pointer;
+}
+
+.textButton:hover {
+  color: var(--color-plum-hover);
+  background: var(--color-plum-wash);
+}
+
+.actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.emptyRow {
+  padding: var(--space-4);
+  font-size: var(--text-s);
+  color: var(--color-ink-muted);
+  border: var(--border);
+  border-radius: var(--radius-control);
+}
+
+.upgrade {
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  font-weight: 700;
+  color: var(--color-surface);
+  background: var(--color-plum);
+  border: 0;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
+.upgrade:hover {
+  background: var(--color-plum-hover);
+}
+
+.banner {
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-s);
+  background: var(--color-plum-wash);
+  border-left: 4px solid var(--color-plum);
+  border-radius: var(--radius-chip);
+}

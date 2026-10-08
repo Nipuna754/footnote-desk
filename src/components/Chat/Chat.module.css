@@ -1,0 +1,329 @@
+.layout {
+  display: grid;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+@media (min-width: 64rem) {
+  .layout {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  }
+}
+
+/* Conversation */
+.chat {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background: var(--color-surface);
+  border: var(--border);
+  border-radius: var(--radius-control);
+}
+
+.chatHead {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: var(--border);
+}
+
+.chatTitle {
+  font-size: var(--text-m);
+  font-weight: 700;
+}
+
+.scope {
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+  overflow-wrap: anywhere;
+}
+
+.thread {
+  display: grid;
+  gap: var(--space-6);
+  padding: var(--space-5);
+}
+
+.empty {
+  padding: var(--space-6) var(--space-5);
+  font-family: var(--font-reading);
+  color: var(--color-ink-muted);
+}
+
+.turn {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.question {
+  justify-self: end;
+  max-width: 85%;
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-plum-wash);
+  color: var(--color-plum);
+  font-weight: 600;
+  border-radius: var(--radius-control) var(--radius-control) var(--radius-chip) var(--radius-control);
+}
+
+.answer {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 62ch;
+}
+
+.answerText {
+  font-family: var(--font-reading);
+  font-size: 1.125rem;
+  line-height: 1.65;
+}
+
+/* Citation marker: sits in the line like a footnote, but is a real 24px target */
+.marker {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.5rem;
+  height: 1.5rem;
+  margin-inline: 0.15em 0.1em;
+  padding: 0 0.3em;
+  vertical-align: 0.15em;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1;
+  color: var(--color-plum);
+  background: var(--color-plum-wash);
+  border: 1px solid transparent;
+  border-radius: var(--radius-chip);
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.marker:hover,
+.marker[data-active] {
+  background: var(--color-highlighter);
+  border-color: var(--color-plum);
+}
+
+.sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.source {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.25rem;
+  padding: var(--space-1) var(--space-3) var(--space-1) var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-ink);
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-chip);
+  cursor: pointer;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.source:hover,
+.source[data-active] {
+  border-color: var(--color-plum);
+  background: var(--color-plum-wash);
+}
+
+.sourceN {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  font-family: var(--font-mono);
+  color: var(--color-surface);
+  background: var(--color-plum);
+  border-radius: 4px;
+}
+
+.sourcePage {
+  color: var(--color-ink-muted);
+  white-space: nowrap;
+}
+
+.thinking {
+  font-size: var(--text-s);
+  color: var(--color-ink-muted);
+}
+
+.dots::after {
+  content: "...";
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  vertical-align: bottom;
+  animation: dots 1.2s steps(4) infinite;
+}
+
+@keyframes dots {
+  to {
+    width: 1.2em;
+  }
+}
+
+.notCovered {
+  display: grid;
+  gap: var(--space-1);
+  max-width: 62ch;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-s);
+  border: 2px dashed var(--color-rule-strong);
+  border-radius: var(--radius-control);
+}
+
+.failed {
+  max-width: 62ch;
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-control);
+}
+
+.notCoveredTitle {
+  font-weight: 700;
+}
+
+/* Composer */
+.composer {
+  display: grid;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5) var(--space-5);
+  border-top: var(--border);
+}
+
+.suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.suggestion {
+  min-height: 2.25rem;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-plum);
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.suggestion:hover:not(:disabled) {
+  border-color: var(--color-plum);
+}
+
+.suggestion:disabled,
+.send:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.form {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-control);
+}
+
+.input::placeholder {
+  color: var(--color-ink-muted);
+}
+
+.input:focus-visible {
+  border-color: var(--color-plum);
+}
+
+.send {
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  font-weight: 700;
+  color: var(--color-surface);
+  background: var(--color-plum);
+  border: 0;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
+.send:hover:not(:disabled) {
+  background: var(--color-plum-hover);
+}
+
+/* Source panel: beside the chat on wide screens, a sheet on phones */
+.panel {
+  display: none;
+}
+
+@media (min-width: 64rem) {
+  .panel {
+    display: block;
+    position: sticky;
+    top: var(--space-5);
+  }
+}
+
+.sheet {
+  width: 100%;
+  max-width: 40rem;
+  max-height: 85dvh;
+  margin: auto auto 0;
+  padding: 0 var(--space-4) var(--space-5);
+  background: var(--color-paper);
+  border: 0;
+  border-radius: var(--radius-control) var(--radius-control) 0 0;
+}
+
+.sheet::backdrop {
+  background: rgb(30 26 36 / 0.5);
+}
+
+.sheet[open] {
+  animation: rise 220ms var(--ease-out);
+}
+
+@keyframes rise {
+  from {
+    translate: 0 2rem;
+    opacity: 0;
+  }
+}
+
+.sheetBar {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: flex-end;
+  padding-block: var(--space-2);
+  background: var(--color-paper);
+}
+
+.close {
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  font-weight: 600;
+  color: var(--color-plum);
+  background: transparent;
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
+.thread[hidden] {
+  display: none;
+}

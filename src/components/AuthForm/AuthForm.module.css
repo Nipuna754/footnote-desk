@@ -1,0 +1,72 @@
+.form {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.field label {
+  font-size: var(--text-s);
+  font-weight: 700;
+}
+
+.field input {
+  min-height: 2.75rem;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-rule-strong);
+  border-radius: var(--radius-control);
+}
+
+.field input:focus-visible {
+  border-color: var(--color-plum);
+}
+
+.hint {
+  font-size: var(--text-xs);
+  color: var(--color-ink-muted);
+}
+
+.error {
+  font-size: var(--text-s);
+  font-weight: 600;
+  color: var(--color-error);
+}
+
+.error:empty {
+  display: none;
+}
+
+.notice {
+  padding: var(--space-3);
+  font-size: var(--text-s);
+  background: var(--color-plum-wash);
+  border-radius: var(--radius-control);
+}
+
+.submit {
+  min-height: 2.75rem;
+  font-weight: 700;
+  color: var(--color-surface);
+  background: var(--color-plum);
+  border: 0;
+  border-radius: var(--radius-control);
+  cursor: pointer;
+}
+
+.submit:hover:not(:disabled) {
+  background: var(--color-plum-hover);
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.switch {
+  font-size: var(--text-s);
+  color: var(--color-ink-muted);
+}
