@@ -1,6 +1,6 @@
 import { adminClient } from "@/lib/supabase/admin";
 import { answerQuestion } from "@/lib/answer";
-import { AiBusyError } from "@/lib/ai";
+import { AiBusyError, type Turn } from "@/lib/ai";
 import { checkLimits, hashIp } from "@/lib/limits";
 
 const BUSY = "Footnote Desk is busy right now. Try again in a minute.";
@@ -12,6 +12,16 @@ export async function POST(request: Request) {
   if (!/^[a-z0-9-]{3,40}$/.test(slug) || question.length < 3 || question.length > 300) {
     return Response.json({ error: "Ask a question between 3 and 300 characters." }, { status: 400 });
   }
+
+  // Up to 3 earlier turns from the visitor's browser. Treated as context only:
+  // every fact in the answer must still come from the documents.
+  const history: Turn[] = (Array.isArray(body?.history) ? body.history : [])
+    .slice(-3)
+    .filter((t: unknown): t is Turn => {
+      const turn = t as Turn;
+      return typeof turn?.question === "string" && typeof turn?.answer === "string";
+    })
+    .map((t: Turn) => ({ question: t.question.slice(0, 300), answer: t.answer.slice(0, 1500) }));
 
   const db = adminClient();
   const { data: workspace } = await db
@@ -33,7 +43,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const answer = await answerQuestion(workspace, question);
+    const answer = await answerQuestion(workspace, question, history);
     await db.from("questions").insert({
       workspace_id: workspace.id,
       question,

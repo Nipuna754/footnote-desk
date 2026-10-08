@@ -3,7 +3,7 @@
   Returns the same Answer shape the chat already renders.
 */
 import { adminClient } from "@/lib/supabase/admin";
-import { ai, type Passage } from "@/lib/ai";
+import { ai, type Passage, type Turn } from "@/lib/ai";
 import type { Answer, AnswerPart, Citation } from "@/content/demo";
 
 const TOP_K = 6;
@@ -16,9 +16,13 @@ const squash = (s: string) => s.replace(/\s+/g, " ").trim();
 export async function answerQuestion(
   workspace: { id: string; name: string },
   question: string,
+  history: Turn[] = [],
 ): Promise<Answer> {
   const db = adminClient();
-  const [queryVector] = await ai().embed([question], "query");
+  // A follow-up like "what about the second one?" only makes sense with the
+  // questions before it, so search with those included.
+  const searchText = [...history.slice(-2).map((t) => t.question), question].join("\n");
+  const [queryVector] = await ai().embed([searchText], "query");
 
   const { data: matches, error } = await db.rpc("match_chunks", {
     p_workspace: workspace.id,
@@ -39,11 +43,14 @@ export async function answerQuestion(
     }),
   );
 
-  const draft = await ai().answer(question, passages, workspace.name);
+  const draft = await ai().answer(question, passages, workspace.name, history);
   return toAnswer(draft, passages);
 }
 
-/** Renumbers cited passages 1, 2, 3 in reading order and drops anything unsupported. */
+/**
+ * Numbers sources 1, 2, 3 in reading order, one number per file and page
+ * (several passages from the same page share it), and drops unsupported sentences.
+ */
 export function toAnswer(
   draft: { answered: boolean; sentences: { text: string; sources: number[]; quote: string }[] },
   passages: Passage[],
@@ -51,8 +58,9 @@ export function toAnswer(
   if (!draft.answered) return { kind: "not-covered" };
 
   const byN = new Map(passages.map((p) => [p.n, p]));
+  const pageKey = (p: Passage) => `${p.file}#${p.page}`;
   const citations: Citation[] = [];
-  const numberFor = new Map<number, number>();
+  const citationFor = new Map<string, Citation>();
   const parts: AnswerPart[] = [];
 
   for (const s of draft.sentences ?? []) {
@@ -61,22 +69,25 @@ export function toAnswer(
 
     if (parts.length) parts.push(" ");
     parts.push(s.text.trim());
+
+    const quote = squash(s.quote ?? "");
+    const cited = new Set<number>();
     for (const n of sources) {
-      if (!numberFor.has(n)) {
-        const p = byN.get(n)!;
-        const quote = squash(s.quote ?? "");
-        const context = squash(p.content);
-        numberFor.set(n, citations.length + 1);
-        citations.push({
-          n: citations.length + 1,
-          file: p.file,
-          page: p.page,
-          // Only highlight a quote that really is in the passage, word for word.
-          quote: quote && context.includes(quote) ? quote : "",
-          context,
-        });
+      const p = byN.get(n)!;
+      let c = citationFor.get(pageKey(p));
+      if (!c) {
+        c = { n: citations.length + 1, file: p.file, page: p.page, quote: "", context: "" };
+        citationFor.set(pageKey(p), c);
+        citations.push(c);
       }
-      parts.push({ cite: numberFor.get(n)! });
+      const text = squash(p.content);
+      if (!c.context.includes(text)) c.context = c.context ? `${c.context} \u2026 ${text}` : text;
+      // Only highlight a quote that really is in the source, word for word.
+      if (!c.quote && quote && c.context.includes(quote)) c.quote = quote;
+      if (!cited.has(c.n)) {
+        cited.add(c.n);
+        parts.push({ cite: c.n });
+      }
     }
   }
 

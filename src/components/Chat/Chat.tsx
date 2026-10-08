@@ -50,7 +50,7 @@ export function Chat({ company, documents, suggestions = [], opening }: ChatProp
       const res = await fetch("/api/ask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ workspace: company.slug, question: q }),
+        body: JSON.stringify({ workspace: company.slug, question: q, history: recentTurns(turns) }),
       });
       const data = await res.json();
       answer = res.ok ? data.answer : { kind: "error", message: data.error };
@@ -258,6 +258,20 @@ function AnswerBlock({
       </ul>
     </div>
   );
+}
+
+/** The last few finished exchanges as plain text, so the server understands follow-ups. */
+function recentTurns(turns: Turn[]) {
+  return turns
+    .filter((t) => t.answer && t.answer.kind !== "error")
+    .slice(-3)
+    .map((t) => ({
+      question: t.question,
+      answer:
+        t.answer!.kind === "answered"
+          ? t.answer!.parts.filter((p): p is string => typeof p === "string").join("")
+          : "(The documents didn't cover this.)",
+    }));
 }
 
 function findCitation(turns: Turn[], active: Active): Citation | null {

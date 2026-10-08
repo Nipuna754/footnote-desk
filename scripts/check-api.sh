@@ -3,7 +3,7 @@
 # Usage: bash scripts/check-api.sh
 # Note: this asks 3 questions, and the limit is 5 a minute per visitor.
 set -u
-URL=${URL:-http://localhost:3000/api/ask}
+URL=${URL:-http://localhost:3001/api/ask}
 fail=0
 
 ask() {
