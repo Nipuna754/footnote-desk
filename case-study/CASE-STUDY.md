@@ -73,6 +73,8 @@ No real customers yet: this is a portfolio build with a fictional demo company.
 
 ## Demo video script (about 60 seconds)
 
+Recorded: `case-study/footnote-desk-demo.mp4` (53 s, captions, no voice). To record it again after changes, with the dev server on port 3002: `node scripts/record-demo.mjs prep`, then `OUT_DIR=/tmp/frames node scripts/record-demo.mjs record`, then `swift scripts/frames-to-mp4.swift /tmp/frames case-study/footnote-desk-demo.mp4`.
+
 Record with QuickTime (File → New Screen Recording) at 1440×900. Silent with captions, or read the lines aloud.
 
 | Time | On screen | Say or caption |

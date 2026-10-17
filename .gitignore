@@ -44,3 +44,6 @@ next-env.d.ts
 
 # local tools
 /.claude/
+
+# Demo video (large; made by scripts/record-demo.mjs)
+case-study/*.mp4
