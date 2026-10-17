@@ -4,6 +4,14 @@ import { monoFont, readingFont, uiFont } from "./fonts";
 import { SiteNav } from "@/components/SiteNav/SiteNav";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://footnote-desk.vercel.app"),
+  // Link previews (Upwork, Slack, LinkedIn). The image is app/opengraph-image.png.
+  openGraph: {
+    type: "website",
+    siteName: "Footnote Desk",
+    title: "Footnote Desk: a support bot that shows its sources",
+    description: "Answers customer questions only from your documents, cites the exact page, and says when it doesn't know.",
+  },
   title: {
     default: "Footnote Desk: a support bot that shows its sources",
     template: "%s | Footnote Desk",
