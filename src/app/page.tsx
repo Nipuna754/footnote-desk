@@ -14,10 +14,17 @@ export default function Home() {
           Footnote Desk answers customer questions only from the documents you upload, points to
           the exact page, and tells you when your documents don&rsquo;t have the answer.
         </p>
+        <div className={styles.actions}>
+          <Link href="/signup" className="button" data-primary="">
+            Get started free
+          </Link>
+          <Link href="/pricing" className="button">
+            See pricing
+          </Link>
+        </div>
         <p className={styles.demoNote}>
-          Try it below. Aerin Home is a made-up company with three sample documents. Select
-          a number in an answer to see the passage it came from.{" "}
-          <Link href="/signup">Make one for your own documents</Link>.
+          Try it below: Aerin Home is a made-up company with three sample documents. Select a
+          number in an answer to see the passage it came from.
         </p>
       </div>
       <Chat

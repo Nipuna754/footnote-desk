@@ -7,7 +7,8 @@ import styles from "./SiteNav.module.css";
 const links = [
   { href: "/", label: "Demo" },
   { href: "/pricing", label: "Pricing" },
-  { href: "/dashboard", label: "Dashboard" },
+  // Signed-in owners land on their dashboard from here (the sign-in page redirects them)
+  { href: "/signin", label: "Log in" },
 ];
 
 export function SiteNav() {
@@ -38,6 +39,9 @@ export function SiteNav() {
             ))}
           </ul>
         </nav>
+        <Link href="/signup" className={`button ${styles.start}`} data-primary="">
+          Get started free
+        </Link>
       </div>
     </header>
   );

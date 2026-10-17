@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
+import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/AuthForm/AuthForm";
+import { currentOwner } from "@/lib/supabase/server";
 import styles from "../auth.module.css";
 
 export const metadata: Metadata = { title: "Create an account" };
 
-export default function SignUpPage() {
+export default async function SignUpPage() {
+  if (await currentOwner()) redirect("/dashboard");
   return (
     <main id="main" className={`container ${styles.main}`}>
       <div className={styles.card}>

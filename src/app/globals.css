@@ -136,6 +136,35 @@ select {
   color: var(--color-surface);
 }
 
+/* Call-to-action link styled as a button: outlined, or solid with data-primary */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  font-weight: 700;
+  white-space: nowrap;
+  text-decoration: none;
+  color: var(--color-plum);
+  border: 1px solid var(--color-plum);
+  border-radius: var(--radius-control);
+}
+
+.button:hover {
+  background: var(--color-plum-wash);
+}
+
+.button[data-primary] {
+  color: var(--color-surface);
+  background: var(--color-plum);
+}
+
+.button[data-primary]:hover {
+  color: var(--color-surface);
+  background: var(--color-plum-hover);
+}
+
 .container {
   width: 100%;
   max-width: var(--max-width);

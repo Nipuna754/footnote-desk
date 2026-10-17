@@ -63,7 +63,7 @@ export default function PricingPage() {
                 <li key={f}>{f}</li>
               ))}
             </ul>
-            <Link href={p.cta.href} className={styles.cta}>
+            <Link href={p.cta.href} className="button" data-primary={p.featured ? "" : undefined}>
               {p.cta.label}
             </Link>
           </li>
